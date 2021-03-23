@@ -225,8 +225,9 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
   //% color="#3943c6" weight=78　blockId=plottercar_1sou_back
   //% block="後ろへ |%F_cm| ｃｍ進む" group="3　基本の動き"
     export function plottercar_1sou_back(F_cm: number): void {
-    Stepping_R = Stepping1
+/*  Stepping_R = Stepping1
     Stepping_L = Stepping2
+*/
     moter_number= F_cm / (18.9*cond_Distance) * 512;
     moter(moter_number,moter_number,2,2);
     
