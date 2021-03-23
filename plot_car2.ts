@@ -88,18 +88,54 @@ let moter_number=0;
 
 namespace eureka_plotter_car {
 
-function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number)
-{
+function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
     led.enable(false);
     let i=0;
     moter_number= R_kyori / (18.9*cond_Distance) * 512;
 
-    for (let a=0 ; a<4;a++) {
-        for (let b=0 ; b<4 ;b++){
+    /*右ステッピングの処理*/
+    switch (R_zengo) {
+      case 0:
 
-        Stepping_R[a,b] = Stepping1[a,b];
-        Stepping_L[a,b] = Stepping2[a,b];
+            Stepping_R = Stepping0;
+        break;
+      case 1:
+        for (let a=0 ; a<4;a++) {
+            for (let b=0 ; b<4 ;b++){
+            Stepping_R[a,b] = Stepping1[a,b];
+            }
         }
+        break;
+      case 2:
+        for (let a=0 ; a<4;a++) {
+            for (let b=0 ; b<4 ;b++){
+            Stepping_R[a,b] = Stepping1[a,4-b];
+            }
+        }
+        break;
+    }
+
+    /*左ステッピングの処理*/
+    switch (L_zengo) {
+      case 0:
+            Stepping_L = Stepping0;
+        break;
+      case 1:
+        for (let a=0 ; a<4;a++) {
+            for (let b=0 ; b<4 ;b++){
+            Stepping_L[a,b] = Stepping1[a,4-b];
+            
+            }
+        }
+        break;
+      case 2:
+        for (let a=0 ; a<4;a++) {
+            for (let b=0 ; b<4 ;b++){
+            
+            Stepping_L[a,b] = Stepping1[a,b];
+            }
+        }
+        break;
     }
 
 
@@ -319,6 +355,3 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number)
   }
 
 }
-
-
-
