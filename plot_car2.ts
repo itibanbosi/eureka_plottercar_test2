@@ -99,14 +99,14 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
 
             Stepping_R = Stepping0;
         break;
-      case 1:
+      case 2:
         for (let a=0 ; a<4;a++) {
             for (let b=0 ; b<4 ;b++){
             Stepping_R[a,b] = Stepping1[a,b];
             }
         }
         break;
-      case 2:
+      case 1:
         for (let a=0 ; a<4;a++) {
             for (let b=0 ; b<4 ;b++){
             Stepping_R[a,b] = Stepping1[a,4-b];
@@ -120,7 +120,7 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
       case 0:
             Stepping_L = Stepping0;
         break;
-      case 1:
+      case 2:
         for (let a=0 ; a<4;a++) {
             for (let b=0 ; b<4 ;b++){
             Stepping_L[a,b] = Stepping1[a,4-b];
@@ -128,7 +128,7 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
             }
         }
         break;
-      case 2:
+      case 1:
         for (let a=0 ; a<4;a++) {
             for (let b=0 ; b<4 ;b++){
             
@@ -138,11 +138,7 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
         break;
     }
 
-
-
-
-
-    for (let index = 0; index < moter_number; index++) {
+    for (let index = 0; index < R_kyori; index++) {
     let Data1=0;
     while ( Data1 < 4){
       pins.digitalWritePin(DigitalPin.P3, Stepping_R[Data1][0]);
