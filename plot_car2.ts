@@ -1,4 +1,7 @@
 let wait = 0;
+let hasuu_mae;
+let hasuu_ato;
+let genzai_step_iti;
 
 
 enum pen_onoff {
@@ -77,9 +80,7 @@ let Stepping_L = [
 let moter_number=0;
 
 //% color="#3943c6" block="ﾌﾟﾛｯﾀｰ・ｶｰVer1.4" icon="\uf1b9"
-
 namespace eureka_plotter_car {
-
 function  moter(kyori:number,R_zengo:number,L_zengo:number){
     led.enable(false);
     let i=0;
