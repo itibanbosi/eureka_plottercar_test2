@@ -1,4 +1,6 @@
 let wait = 0;
+
+
 enum pen_onoff {
   up,
   down,
@@ -18,6 +20,7 @@ enum houkou {
     ななめ右,
     ななめ左,
 }
+
 
 enum microbit_version {
     Version1,
@@ -49,12 +52,18 @@ let Stepping1 = [
   [0,1,0,0],
   [0,0,1,0],
   [0,0,0,1],
+  [1,0,0,0],
+  [0,1,0,0],
+  [0,0,1,0],
   ];
   let Stepping2 = [
   [0,0,0,1],
   [0,0,1,0],
   [0,1,0,0],
   [1,0,0,0],
+  [0,0,0,1],
+  [0,0,1,0],
+  [0,1,0,0],
   ];
 
 let Stepping_R = [
@@ -79,10 +88,24 @@ let moter_number=0;
 
 namespace eureka_plotter_car {
 
-function  moter()
+function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number)
 {
     led.enable(false);
     let i=0;
+    moter_number= R_kyori / (18.9*cond_Distance) * 512;
+
+    for (let a=0 ; a<4;a++) {
+        for (let b=0 ; b<4 ;b++){
+
+        Stepping_R[a,b] = Stepping1[a,b];
+        Stepping_L[a,b] = Stepping2[a,b];
+        }
+    }
+
+
+
+
+
     for (let index = 0; index < moter_number; index++) {
     let Data1=0;
     while ( Data1 < 4){
@@ -149,7 +172,7 @@ function  moter()
     export function plottercar_1sou_forward(F_cm: number): void {
 
 
-
+/*
     for (let a=0 ; a<4;a++) {
         for (let b=0 ; b<4 ;b++){
 
@@ -157,9 +180,9 @@ function  moter()
         Stepping_L[a,b] = Stepping1[a,b];
         }
     }
-
+*/
     moter_number= F_cm / (18.9*cond_Distance) * 512;
-    moter();
+    moter(moter_number,moter_number,1,1);
     }
 
 
@@ -169,7 +192,8 @@ function  moter()
     Stepping_R = Stepping1
     Stepping_L = Stepping2
     moter_number= F_cm / (18.9*cond_Distance) * 512;
-    moter();
+    moter(moter_number,moter_number,2,2);
+    
     }
 
 
@@ -180,7 +204,8 @@ function  moter()
     Stepping_R = Stepping2
     Stepping_L = Stepping2
     moter_number= L_degree / 360 * 512 * 1.62*cond_degree;
-    moter();
+    moter(moter_number,moter_number,2,1);
+    
    }
  
   //% color="#3943c6" weight=74　blockId=plottercar_R_cycle
@@ -189,7 +214,7 @@ function  moter()
     Stepping_R = Stepping1
     Stepping_L = Stepping1
     moter_number= R_degree / 360 * 512 * 1.62*cond_degree;
-    moter();
+    moter(moter_number,moter_number,1,2);
   }
 
   //% color="#ff4940" weight=71　blockId=plottercar_rest
@@ -198,7 +223,7 @@ function  moter()
     Stepping_R = Stepping0;
     Stepping_L = Stepping0;
     moter_number= 1;
-    moter();
+    moter(moter_number,moter_number,0,1);
   }
 
   //% color="#3943c6" weight=55　blockId=plottercar_R_step
@@ -211,12 +236,12 @@ function  moter()
             Stepping_R = Stepping2;
             Stepping_L = Stepping0;
 
-            moter();
+            moter(R_step,0,1,0);
         return;   
         case plotter_houkou.後:
             Stepping_R = Stepping1;
             Stepping_L = Stepping0;
-            moter();      
+            moter(R_step,0,2,0);      
         return;
     }
 }
@@ -230,12 +255,12 @@ function  moter()
             Stepping_R = Stepping0;
             Stepping_L = Stepping1;
 
-            moter();
+            moter(0,L_step,0,1); 
         return;   
         case plotter_houkou.後:
             Stepping_R = Stepping0;
             Stepping_L = Stepping2;
-            moter();      
+            moter(0,L_step,0,2);    
         return;
     }
 } 
