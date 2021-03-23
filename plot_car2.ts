@@ -224,7 +224,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
   export function plottercar_L_cycle(L_degree: number): void {
 
     moter_number= L_degree / 360 * 512 * 1.62*cond_degree;
-    moter(moter_number,2,1);
+    moter(moter_number,1,2);
     
    }
  
@@ -233,7 +233,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
   export function plottercar_R_cycle(R_degree: number): void {
 
     moter_number= R_degree / 360 * 512 * 1.62*cond_degree;
-    moter(moter_number,1,2);
+    moter(moter_number,2,1);
   }
 
   //% color="#ff4940" weight=71　blockId=plottercar_rest
