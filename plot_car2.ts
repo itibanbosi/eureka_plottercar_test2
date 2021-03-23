@@ -88,10 +88,10 @@ let moter_number=0;
 
 namespace eureka_plotter_car {
 
-function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
+function  moter(kyori:number,R_zengo:number,L_zengo:number){
     led.enable(false);
     let i=0;
-    moter_number= R_kyori / (18.9*cond_Distance) * 512;
+
 
     /*右ステッピングの処理*/
     switch (R_zengo) {
@@ -138,7 +138,7 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
         break;
     }
 
-    for (let index = 0; index < R_kyori; index++) {
+    for (let index = 0; index < kyori; index++) {
     let Data1=0;
     while ( Data1 < 4){
       pins.digitalWritePin(DigitalPin.P3, Stepping_R[Data1][0]);
@@ -203,29 +203,17 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
   //% block="前へ |%F_cm| ｃｍ進む" group="3　基本の動き"
     export function plottercar_1sou_forward(F_cm: number): void {
 
-
-/*
-    for (let a=0 ; a<4;a++) {
-        for (let b=0 ; b<4 ;b++){
-
-        Stepping_R[a,b] = Stepping1[a,b];
-        Stepping_L[a,b] = Stepping1[a,b];
-        }
-    }
-*/
     moter_number= F_cm / (18.9*cond_Distance) * 512;
-    moter(moter_number,moter_number,1,1);
+    moter(moter_number,1,1);
     }
 
 
   //% color="#3943c6" weight=78　blockId=plottercar_1sou_back
   //% block="後ろへ |%F_cm| ｃｍ進む" group="3　基本の動き"
     export function plottercar_1sou_back(F_cm: number): void {
-/*  Stepping_R = Stepping1
-    Stepping_L = Stepping2
-*/
+
     moter_number= F_cm / (18.9*cond_Distance) * 512;
-    moter(moter_number,moter_number,2,2);
+    moter(moter_number,2,2);
     
     }
 
@@ -234,29 +222,26 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
   //% block="左回り　角度 |%L_degree| " group="3　基本の動き"
 
   export function plottercar_L_cycle(L_degree: number): void {
-    Stepping_R = Stepping2
-    Stepping_L = Stepping2
+
     moter_number= L_degree / 360 * 512 * 1.62*cond_degree;
-    moter(moter_number,moter_number,2,1);
+    moter(moter_number,2,1);
     
    }
  
   //% color="#3943c6" weight=74　blockId=plottercar_R_cycle
   //% block="右回り　角度 |%R_degree| " group="3　基本の動き"
   export function plottercar_R_cycle(R_degree: number): void {
-    Stepping_R = Stepping1
-    Stepping_L = Stepping1
+
     moter_number= R_degree / 360 * 512 * 1.62*cond_degree;
-    moter(moter_number,moter_number,1,2);
+    moter(moter_number,1,2);
   }
 
   //% color="#ff4940" weight=71　blockId=plottercar_rest
   //% block="停止状態（電流ＯＦＦ）" group="3　基本の動き"
   export function plottercar_frest(): void {
-    Stepping_R = Stepping0;
-    Stepping_L = Stepping0;
+
     moter_number= 1;
-    moter(moter_number,moter_number,0,1);
+    moter(moter_number,0,1);
   }
 
   //% color="#3943c6" weight=55　blockId=plottercar_R_step
@@ -266,15 +251,12 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
     moter_number= R_step;
         switch(houkou){
         case plotter_houkou.前:
-            Stepping_R = Stepping2;
-            Stepping_L = Stepping0;
 
-            moter(R_step,0,1,0);
+            moter(R_step,1,0);
         return;   
         case plotter_houkou.後:
-            Stepping_R = Stepping1;
-            Stepping_L = Stepping0;
-            moter(R_step,0,2,0);      
+
+            moter(R_step,2,0);      
         return;
     }
 }
@@ -285,15 +267,14 @@ function  moter(R_kyori:number,L_kyori:number,R_zengo:number,L_zengo:number){
     moter_number= L_step;
         switch(houkou){
         case plotter_houkou.前:
-            Stepping_R = Stepping0;
-            Stepping_L = Stepping1;
 
-            moter(0,L_step,0,1); 
+
+            moter(L_step,0,1); 
         return;   
         case plotter_houkou.後:
             Stepping_R = Stepping0;
             Stepping_L = Stepping2;
-            moter(0,L_step,0,2);    
+            moter(L_step,0,2);    
         return;
     }
 } 
