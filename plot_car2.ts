@@ -147,8 +147,17 @@ function  moter()
   //% color="#3943c6" weight=80　blockId=plottercar_1sou_forward
   //% block="前へ |%F_cm| ｃｍ進む" group="3　基本の動き"
     export function plottercar_1sou_forward(F_cm: number): void {
-    Stepping_R = Stepping2;
-    Stepping_L = Stepping1;
+
+
+
+    for (let a=0 ; a<4;a++) {
+        for (let b=0 ; b<4 ;b++){
+
+        Stepping_R[a,b] = Stepping1[a,b];
+        Stepping_L[a,b] = Stepping1[a,b];
+        }
+    }
+
     moter_number= F_cm / (18.9*cond_Distance) * 512;
     moter();
     }
