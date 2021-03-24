@@ -88,8 +88,10 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
 
     /* 端数の計算計算  */
 
-    let kyori_hasuu=kyori/1
-    let kyori_seisuu=Math.floor(kyori)
+    let kyori_hasuu=kyori/1;
+    serial.writeValue("kyori_hasuu", kyori_hasuu);
+    let kyori_seisuu=Math.floor(kyori);
+    serial.writeValue("kyori_seisuu", kyori_seisuu);
 
 
     /*右ステッピングの処理*/
