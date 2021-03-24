@@ -81,9 +81,15 @@ let moter_number=0;
 
 //% color="#3943c6" block="ﾌﾟﾛｯﾀｰ・ｶｰVer1.4" icon="\uf1b9"
 namespace eureka_plotter_car {
+
 function  moter(kyori:number,R_zengo:number,L_zengo:number){
     led.enable(false);
     let i=0;
+
+    /* 端数の計算計算  */
+
+    let kyori_hasuu=kyori/1
+    let kyori_seisuu=Math.floor(kyori)
 
 
     /*右ステッピングの処理*/
@@ -127,8 +133,8 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         }
         break;
     }
-
-    for (let index = 0; index < kyori; index++) {
+　　　/*  整数部の処理　 */ 
+    for (let index = 0; index < kyori_seisuu; index++) {
     let Data1=0;
     while ( Data1 < 4){
       pins.digitalWritePin(DigitalPin.P3, Stepping_R[Data1][0]);
@@ -145,6 +151,31 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       }
       }
     }
+
+   /* 端数分の進み方と処理  */
+　  let step_number=Math.floor(kyori_hasuu*10/4);
+    let Data1=0;
+    while ( Data1 < step_number){
+      pins.digitalWritePin(DigitalPin.P3, Stepping_R[Data1][0]);
+      pins.digitalWritePin(DigitalPin.P13, Stepping_L[Data1][0]);
+      pins.digitalWritePin(DigitalPin.P4, Stepping_R[Data1][1]);
+      pins.digitalWritePin(DigitalPin.P14, Stepping_L[Data1][1]);
+      pins.digitalWritePin(DigitalPin.P6, Stepping_R[Data1][2]);
+      pins.digitalWritePin(DigitalPin.P15, Stepping_L[Data1][2]);
+      pins.digitalWritePin(DigitalPin.P7, Stepping_R[Data1][3]);
+      pins.digitalWritePin(DigitalPin.P16, Stepping_L[Data1][3]);
+      Data1=Data1+1;
+      for (i = 0; i < microbit_wait; i++);
+      {
+      }
+      }
+ 
+
+
+
+
+
+
 }
 
   //% color="#ff3d03" weight=90 blockId=auto_led_off block="ﾏｲｸﾛﾋﾞｯﾄのLEDを |%Matrix_LED| にする" group="1 初期設定"
