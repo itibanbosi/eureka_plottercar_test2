@@ -1,7 +1,7 @@
 let wait = 0;
 let hasuu_mae;
 let hasuu_ato;
-let genzai_step_iti;
+let tugi_iti=0;
 
 
 enum pen_onoff {
@@ -93,6 +93,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
     let kyori_seisuu=Math.floor(kyori);
     serial.writeValue("kyori_seisuu", kyori_seisuu);
 
+    tugi_iti=tugi_iti % 4
 
     /*右ステッピングの処理*/
     switch (R_zengo) {
@@ -100,7 +101,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         Stepping_R = Stepping0;
         break;
       case 2:
-        for (let a=0 ; a<4;a++) {
+        for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
             for (let b=0 ; b<4 ;b++){
             Stepping_R[a,b] = Stepping1[a,b];
             }
@@ -173,13 +174,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       {
       }
       }
- 
-
-
-
-
-
-
+    tugi_iti=step_number+1;
 }
 
   //% color="#ff3d03" weight=90 blockId=auto_led_off block="ﾏｲｸﾛﾋﾞｯﾄのLEDを |%Matrix_LED| にする" group="1 初期設定"
