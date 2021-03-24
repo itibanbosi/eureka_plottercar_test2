@@ -135,7 +135,9 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         }
         break;
     }
-　　　/*  整数部の処理　 */ 
+    serial.writeValue("tugi_iti",tugi_iti);
+    　　　
+    /*  整数部の処理　 */ 
     for (let index = 0; index < kyori_seisuu; index++) {
     let Data1=0;
     while ( Data1 < 4){
@@ -174,7 +176,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       }
       }
     tugi_iti=(step_number+tugi_iti)%4;
-    serial.writeValue("tugi_iti",tugi_iti);
+
 }
 
   //% color="#ff3d03" weight=90 blockId=auto_led_off block="ﾏｲｸﾛﾋﾞｯﾄのLEDを |%Matrix_LED| にする" group="1 初期設定"
