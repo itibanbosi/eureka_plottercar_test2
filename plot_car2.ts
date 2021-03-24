@@ -175,6 +175,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       }
       }
     tugi_iti=step_number+1;
+    serial.writeValue("tugi_iti",tugi_iti);
 }
 
   //% color="#ff3d03" weight=90 blockId=auto_led_off block="ﾏｲｸﾛﾋﾞｯﾄのLEDを |%Matrix_LED| にする" group="1 初期設定"
