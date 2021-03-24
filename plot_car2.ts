@@ -174,7 +174,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       {
       }
       }
-    tugi_iti=step_number;
+    tugi_iti=step_number+tugi_iti;
     serial.writeValue("tugi_iti",tugi_iti);
 }
 
