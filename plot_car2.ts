@@ -37,14 +37,12 @@ let cond_Distance=1;
 let cond_degree=1;
 let microbit_wait=700;
 
-let Stepping = [
-  [0,0,0,0],
-  [0,0,0,0],
-  [0,0,0,0],
-  [0,0,0,0],
-  ];
+
 
 let Stepping0 = [
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
@@ -66,9 +64,14 @@ let Stepping_R = [
   [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
-  ];
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],  ];
 
 let Stepping_L = [
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
@@ -92,7 +95,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
     serial.writeValue("kyori_hasuu", kyori_hasuu);
     let kyori_seisuu=Math.floor(kyori);
     serial.writeValue("kyori_seisuu", kyori_seisuu);
-    serial.writeValue("tugi_iti", tugi_iti);
+
 
     /*右ステッピングの処理*/
     switch (R_zengo) {
@@ -102,14 +105,14 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       case 2:
         for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
             for (let b=0 ; b<4 ;b++){
-            Stepping_R[a-tugi_iti,b] = Stepping1[a,b];
+            Stepping_R[a-tugi_iti] = Stepping1[a];
             }
         }
         break;
       case 1:
         for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
             for (let b=0 ; b<4 ;b++){
-            Stepping_R[a-tugi_iti,b] = Stepping1[a,4-b];
+            Stepping_R[a-tugi_iti] = Stepping1[a];
             }
         }
         break;
@@ -157,9 +160,6 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       }
     }
 
-
-
-
    /* 端数分の進み方と処理  */
 　  let step_number=Math.floor(kyori_hasuu*10/2.5);
     let Data1=0;
@@ -206,7 +206,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         microbit_wait=10000;
         break;       
         case microbit_version.Test_B:
-        microbit_wait=50000;
+        microbit_wait=20000;
         break;       
     }
   }
