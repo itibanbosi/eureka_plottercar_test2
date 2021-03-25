@@ -118,9 +118,7 @@ let Stepping_L = [
   [0,0,0,0],
   ];
 
-
-
-let moter_number=0;
+let moter_number
 
 //% color="#3943c6" block="ﾌﾟﾛｯﾀｰ・ｶｰVer1.4" icon="\uf1b9"
 namespace eureka_plotter_car {
@@ -144,36 +142,33 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         break;
       case 1:
         if (tugi_iti=0) {
-            let Stepping_R=SteppingF_0
+            let Stepping_R=SteppingF_0;
         }
         if (tugi_iti=1) {
-            let Stepping_R=SteppingF_1
+            let Stepping_R=SteppingF_1;
         }
         if (tugi_iti=2) {
-            let Stepping_R=SteppingF_2
+            let Stepping_R=SteppingF_2;
         }
-                if (tugi_iti=3) {
-            let Stepping_R=SteppingF_3
+        if (tugi_iti=3) {
+            let Stepping_R=SteppingF_3;
         }
       break;
       case 2:
-        for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
-            for (let b=0 ; b<4 ;b++){
         if (tugi_iti=0) {
-            let Stepping_R=SteppingB_0
+            let Stepping_R=SteppingB_0;
         }
         if (tugi_iti=1) {
-            let Stepping_R=SteppingB_1
+            let Stepping_R=SteppingB_1;
         }
         if (tugi_iti=2) {
-            let Stepping_R=SteppingB_2
+            let Stepping_R=SteppingB_2;
         }
         if (tugi_iti=3) {
-            let Stepping_R=SteppingB_3
-        }
-        }
+            let Stepping_R=SteppingB_3;
         }
       break;
+
     }
 
     /*左ステッピングの処理*/
@@ -183,36 +178,35 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         break;
       case 1:
         if (tugi_iti=0) {
-            let Stepping_R=SteppingF_0
+            let Stepping_L=SteppingF_0;
         }
         if (tugi_iti=1) {
-            let Stepping_R=SteppingF_1
+            let Stepping_L=SteppingF_1;
         }
         if (tugi_iti=2) {
-            let Stepping_R=SteppingF_2
+            let Stepping_L=SteppingF_2;
         }
-                if (tugi_iti=3) {
-            let Stepping_R=SteppingF_3
+        if (tugi_iti=3) {
+            let Stepping_L=SteppingF_3;
         }
         break;
       case 2:
         if (tugi_iti=0) {
-            let Stepping_L=SteppingB_0
+            let Stepping_L=SteppingB_0;
         }
         if (tugi_iti=1) {
-            let Stepping_L=SteppingB_1
+            let Stepping_L=SteppingB_1;
         }
         if (tugi_iti=2) {
-            let Stepping_L=SteppingB_2
+            let Stepping_L=SteppingB_2;
         }
         if (tugi_iti=3) {
-            let Stepping_L=SteppingB_3
+            let Stepping_L=SteppingB_3;
         }
         break;
 
     }
     serial.writeValue("tugi_iti",tugi_iti);
-
 
     　　　
     /*  整数部の処理　 */ 
