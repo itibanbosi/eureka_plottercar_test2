@@ -219,6 +219,10 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       pins.digitalWritePin(DigitalPin.P15, Stepping_L[Data1*4+2]);
       pins.digitalWritePin(DigitalPin.P7, Stepping_R[Data1*4+3]);
       pins.digitalWritePin(DigitalPin.P16, Stepping_L[Data1*4+3]);
+ 
+     serial.writeValue("Data1",Data1);
+ 
+ 
       Data1=Data1+1;
       for (i = 0; i < microbit_wait; i++);
       {
