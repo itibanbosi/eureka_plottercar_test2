@@ -157,6 +157,9 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
       }
     }
 
+
+
+
    /* 端数分の進み方と処理  */
 　  let step_number=Math.floor(kyori_hasuu*10/2.5);
     let Data1=0;
@@ -203,7 +206,7 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
         microbit_wait=10000;
         break;       
         case microbit_version.Test_B:
-        microbit_wait=20000;
+        microbit_wait=50000;
         break;       
     }
   }
