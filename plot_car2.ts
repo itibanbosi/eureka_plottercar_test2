@@ -39,20 +39,63 @@ let microbit_wait=700;
 
 
 
-let Stepping0 = [
-  [0,0,0,0],
-  [0,0,0,0],
-  [0,0,0,0],
+let Stepping_non = [
   [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
   [0,0,0,0],
   ];
-let Stepping1 = [
+let SteppingF_0 = [
+  [1,0,0,0],
+  [0,1,0,0],
+  [0,0,1,0],
+  [0,0,0,1],
+    ];
+
+let SteppingF_1 = [
+  [0,1,0,0],
+  [0,0,1,0],
+  [0,0,0,1],
+  [1,0,0,0],
+  ];
+let SteppingF_2 = [
+  [0,0,1,0],
+  [0,0,0,1],
+  [1,0,0,0],
+  [0,1,0,0],
+  ];
+let SteppingF_3 = [
   [0,0,0,1],
   [1,0,0,0],
   [0,1,0,0],
   [0,0,1,0],
+  ];
+
+
+let SteppingB_0 = [
+  [0,0,0,1],
+  [0,0,1,0],
+  [0,1,0,0],
+  [1,0,0,0],
+    ];
+
+let SteppingB_1 = [
+  [0,0,1,0],
+  [0,1,0,0],
+  [1,0,0,0],
+  [0,0,0,1],
+  ];
+let SteppingB_2 = [
+  [0,1,0,0],
+  [1,0,0,0],
+  [0,0,0,1],
+  [0,0,1,0],
+  ];
+let SteppingB_3 = [
+  [1,0,0,0],
+  [0,0,0,1],
+  [0,0,1,0],
+  [0,1,0,0],
   ];
 
 
@@ -97,45 +140,80 @@ function  moter(kyori:number,R_zengo:number,L_zengo:number){
     /*右ステッピングの処理*/
     switch (R_zengo) {
       case 0:
-        Stepping_R = Stepping0;
+        Stepping_R = Stepping_non;
         break;
+      case 1:
+        if (tugi_iti=0) {
+            let Stepping_R=SteppingF_0
+        }
+        if (tugi_iti=1) {
+            let Stepping_R=SteppingF_1
+        }
+        if (tugi_iti=2) {
+            let Stepping_R=SteppingF_2
+        }
+                if (tugi_iti=3) {
+            let Stepping_R=SteppingF_3
+        }
+      break;
       case 2:
         for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
             for (let b=0 ; b<4 ;b++){
-            Stepping_R[a-tugi_iti] = Stepping1[a];
-            }
+        if (tugi_iti=0) {
+            let Stepping_R=SteppingB_0
         }
-        break;
-      case 1:
-        for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
-            for (let b=0 ; b<4 ;b++){
-            Stepping_R[a-tugi_iti] = Stepping1[a];
-            }
+        if (tugi_iti=1) {
+            let Stepping_R=SteppingB_1
         }
-        break;
+        if (tugi_iti=2) {
+            let Stepping_R=SteppingB_2
+        }
+        if (tugi_iti=3) {
+            let Stepping_R=SteppingB_3
+        }
+        }
+        }
+      break;
     }
 
     /*左ステッピングの処理*/
     switch (L_zengo) {
       case 0:
-            Stepping_L = Stepping0;
-        break;
-      case 2:
-        for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
-            for (let b=0 ; b<4 ;b++){
-            Stepping_L[a-tugi_iti,b] = Stepping1[a,4-b];
-            }
-        }
+            Stepping_L = Stepping_non;
         break;
       case 1:
-        for (let a=tugi_iti ; a<4+tugi_iti ; a++) {
-            for (let b=0 ; b<4 ;b++){
-                Stepping_L[a-tugi_iti,b] = Stepping1[a,b];
-            }
+        if (tugi_iti=0) {
+            let Stepping_R=SteppingF_0
+        }
+        if (tugi_iti=1) {
+            let Stepping_R=SteppingF_1
+        }
+        if (tugi_iti=2) {
+            let Stepping_R=SteppingF_2
+        }
+                if (tugi_iti=3) {
+            let Stepping_R=SteppingF_3
         }
         break;
+      case 2:
+        if (tugi_iti=0) {
+            let Stepping_L=SteppingB_0
+        }
+        if (tugi_iti=1) {
+            let Stepping_L=SteppingB_1
+        }
+        if (tugi_iti=2) {
+            let Stepping_L=SteppingB_2
+        }
+        if (tugi_iti=3) {
+            let Stepping_L=SteppingB_3
+        }
+        break;
+
     }
     serial.writeValue("tugi_iti",tugi_iti);
+
+
     　　　
     /*  整数部の処理　 */ 
     for (let index = 0; index < kyori_seisuu; index++) {
